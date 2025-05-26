@@ -149,29 +149,38 @@ subscribe(APP_INIT_ERROR, (error) => {
 initialize({
   handlers: {
     config: () => {
+      const defaultConfig = {
+        LEARNING_BASE_URL: 'https://apps.learn.pensainverso.it/learning',
+        LMS_BASE_URL: 'https://learn.pensainverso.it',
+        STUDIO_BASE_URL: 'https://studio.learn.pensainverso.it',
+        STUDIO_SHORT_NAME: 'Studio',
+        SUPPORT_EMAIL: 'learn@pensainverso.it',
+        SUPPORT_URL: 'https://learn.pensainverso.it/support',
+      };
+
       console.log('Initializing config with environment variables:', {
-        SUPPORT_URL: process.env.SUPPORT_URL,
-        SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
-        LEARNING_BASE_URL: process.env.LEARNING_BASE_URL,
-        LMS_BASE_URL: process.env.LMS_BASE_URL,
-        STUDIO_BASE_URL: process.env.STUDIO_BASE_URL,
-        STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME,
+        SUPPORT_URL: process.env.SUPPORT_URL || defaultConfig.SUPPORT_URL,
+        SUPPORT_EMAIL: process.env.SUPPORT_EMAIL || defaultConfig.SUPPORT_EMAIL,
+        LEARNING_BASE_URL: process.env.LEARNING_BASE_URL || defaultConfig.LEARNING_BASE_URL,
+        LMS_BASE_URL: process.env.LMS_BASE_URL || defaultConfig.LMS_BASE_URL,
+        STUDIO_BASE_URL: process.env.STUDIO_BASE_URL || defaultConfig.STUDIO_BASE_URL,
+        STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME || defaultConfig.STUDIO_SHORT_NAME,
       });
       
       try {
         mergeConfig({
-          SUPPORT_URL: process.env.SUPPORT_URL || null,
-          SUPPORT_EMAIL: process.env.SUPPORT_EMAIL || null,
-          LEARNING_BASE_URL: process.env.LEARNING_BASE_URL,
-          LMS_BASE_URL: process.env.LMS_BASE_URL || null,
+          SUPPORT_URL: process.env.SUPPORT_URL || defaultConfig.SUPPORT_URL,
+          SUPPORT_EMAIL: process.env.SUPPORT_EMAIL || defaultConfig.SUPPORT_EMAIL,
+          LEARNING_BASE_URL: process.env.LEARNING_BASE_URL || defaultConfig.LEARNING_BASE_URL,
+          LMS_BASE_URL: process.env.LMS_BASE_URL || defaultConfig.LMS_BASE_URL,
           EXAMS_BASE_URL: process.env.EXAMS_BASE_URL || null,
           CALCULATOR_HELP_URL: process.env.CALCULATOR_HELP_URL || null,
           ENABLE_PROGRESS_GRAPH_SETTINGS: process.env.ENABLE_PROGRESS_GRAPH_SETTINGS || 'false',
           ENABLE_TEAM_TYPE_SETTING: process.env.ENABLE_TEAM_TYPE_SETTING === 'true',
           ENABLE_OPEN_MANAGED_TEAM_TYPE: process.env.ENABLE_OPEN_MANAGED_TEAM_TYPE === 'true',
           BBB_LEARN_MORE_URL: process.env.BBB_LEARN_MORE_URL || '',
-          STUDIO_BASE_URL: process.env.STUDIO_BASE_URL || null,
-          STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME || null,
+          STUDIO_BASE_URL: process.env.STUDIO_BASE_URL || defaultConfig.STUDIO_BASE_URL,
+          STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME || defaultConfig.STUDIO_SHORT_NAME,
           TERMS_OF_SERVICE_URL: process.env.TERMS_OF_SERVICE_URL || null,
           PRIVACY_POLICY_URL: process.env.PRIVACY_POLICY_URL || null,
           ENABLE_ACCESSIBILITY_PAGE: process.env.ENABLE_ACCESSIBILITY_PAGE || 'false',
