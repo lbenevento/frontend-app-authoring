@@ -125,7 +125,7 @@ subscribe(APP_READY, () => {
 
 subscribe(APP_INIT_ERROR, (error) => {
   const root = createRoot(document.getElementById('root'));
-
+  console.log('APP_INIT_ERROR', error);
   root.render(
     <StrictMode>
       <ErrorPage message={error.message} />

@@ -32,6 +32,7 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
+      console.log('ErrorBoundary', this.props);
       return (
         <ErrorPage
           learningContextId={this.props.learningContextId}
