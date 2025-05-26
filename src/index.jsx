@@ -125,7 +125,20 @@ subscribe(APP_READY, () => {
 
 subscribe(APP_INIT_ERROR, (error) => {
   const root = createRoot(document.getElementById('root'));
-  console.log('APP_INIT_ERROR', error);
+  console.error('APP_INIT_ERROR Details:', {
+    message: error.message,
+    stack: error.stack,
+    error: error,
+    config: getConfig(),
+    env: {
+      SUPPORT_URL: process.env.SUPPORT_URL,
+      SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
+      LEARNING_BASE_URL: process.env.LEARNING_BASE_URL,
+      LMS_BASE_URL: process.env.LMS_BASE_URL,
+      STUDIO_BASE_URL: process.env.STUDIO_BASE_URL,
+      STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME,
+    }
+  });
   root.render(
     <StrictMode>
       <ErrorPage message={error.message} />
