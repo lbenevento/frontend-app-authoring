@@ -43,7 +43,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
+function App() {
   useEffect(() => {
     if (process.env.HOTJAR_APP_ID) {
       try {
@@ -111,7 +111,7 @@ const App = () => {
       </ToastProvider>
     </AppProvider>
   );
-};
+}
 
 subscribe(APP_READY, () => {
   const root = createRoot(document.getElementById('root'));
@@ -125,10 +125,10 @@ subscribe(APP_READY, () => {
 
 subscribe(APP_INIT_ERROR, (error) => {
   const root = createRoot(document.getElementById('root'));
-  console.error('APP_INIT_ERROR Details:', {
+  console.error('[Authoring] APP_INIT_ERROR Details:', {
     message: error.message,
     stack: error.stack,
-    error: error,
+    error,
     config: getConfig(),
     env: {
       SUPPORT_URL: process.env.SUPPORT_URL,
@@ -137,7 +137,7 @@ subscribe(APP_INIT_ERROR, (error) => {
       LMS_BASE_URL: process.env.LMS_BASE_URL,
       STUDIO_BASE_URL: process.env.STUDIO_BASE_URL,
       STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME,
-    }
+    },
   });
   root.render(
     <StrictMode>
@@ -166,7 +166,7 @@ initialize({
         STUDIO_BASE_URL: process.env.STUDIO_BASE_URL || defaultConfig.STUDIO_BASE_URL,
         STUDIO_SHORT_NAME: process.env.STUDIO_SHORT_NAME || defaultConfig.STUDIO_SHORT_NAME,
       });
-      
+
       try {
         mergeConfig({
           SUPPORT_URL: process.env.SUPPORT_URL || defaultConfig.SUPPORT_URL,
